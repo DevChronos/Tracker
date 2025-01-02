@@ -14,6 +14,7 @@ namespace Tracker
     public class GroundEffect(TrackerSettings settings)
     {
         private TrackerSettings Settings { get; } = settings;
+        private List<SettingsParameters> GroundEffects => SettingsParameters.GetSettings(Settings);
 
         /// <summary>
         /// Draw
@@ -21,16 +22,8 @@ namespace Tracker
         public void Draw()
         {
             var areaInstance = Core.States.InGameStateObject.CurrentAreaInstance;
-            var effects = new List<string> {
-                "Metadata/Effects/Spells/ground_effects/VisibleServerGroundEffect",
-                "Metadata/Monsters/MonsterMods/GroundOnDeath/BurningGroundDaemon",
-                "Metadata/Monsters/MonsterMods/GroundOnDeath/ColdSnapGroundDaemon",
-                "Metadata/Monsters/MonsterMods/OnDeathLightningExplosion",
-                "Metadata/Monsters/MonsterMods/OnDeathFireExplosion"
-            };
-
             var groundEffects = areaInstance.AwakeEntities
-                .Where(entity => effects.Exists(effect => entity.Value.Path.StartsWith(effect)))
+                .Where(entity => GroundEffects.Exists(effect => entity.Value.Path.StartsWith(effect.GroundEffect)))
                 .Select(entity => entity.Value);
 
             foreach (var entity in groundEffects)
@@ -41,6 +34,25 @@ namespace Tracker
                 var drawList = ImGui.GetBackgroundDrawList();
                 var entitylocation = Core.States.InGameStateObject.CurrentWorldInstance.WorldToScreen(entityRender.WorldPosition);
                 drawList.AddCircle(entitylocation, 100.0f, ImGuiHelper.Color(Settings.GroundEffectColor));
+            }
+        }
+
+        private sealed class SettingsParameters
+        {
+            public string GroundEffect { get; set; }
+
+            public SettingsParameters(string settings)
+            {
+                var split = settings.Split('|');
+                GroundEffect = split[0].Trim();
+            }
+
+            public static List<SettingsParameters> GetSettings(TrackerSettings settings)
+            {
+                return settings.GroundEffects
+                    .Split('\n')
+                    .Where(item => !string.IsNullOrWhiteSpace(item))
+                    .Select(item => new SettingsParameters(item)).ToList();
             }
         }
     }

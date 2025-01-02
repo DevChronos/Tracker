@@ -57,6 +57,7 @@
             ImGui.ColorEdit4("Rare monster line color", ref Settings.RareLineColor);
             ImGui.ColorEdit4("Magic monster line color", ref Settings.MagicLineColor);
             ImGui.ColorEdit4("Ground effect color", ref Settings.GroundEffectColor);
+            ImGui.InputTextMultiline("Ground effects", ref Settings.GroundEffects, 8000, new System.Numerics.Vector2(500, 100));
             ImGui.InputTextMultiline("Monster status effects", ref Settings.MonsterStatusEffects, 8000, new System.Numerics.Vector2(500, 100));
         }
 
