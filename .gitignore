@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Tracker/.vs
+/Tracker/bin
+/Tracker/obj
+/GameHelper/bin
+/GameHelper/obj
