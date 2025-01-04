@@ -1,4 +1,4 @@
-﻿using GameHelper;
+using GameHelper;
 using GameHelper.RemoteEnums;
 using GameHelper.RemoteEnums.Entity;
 using GameHelper.RemoteObjects.Components;
@@ -30,14 +30,23 @@ namespace Tracker
             if (!player.TryGetComponent<Render>(out var playerRender)) return;
             var playerlocation = Core.States.InGameStateObject.CurrentWorldInstance.WorldToScreen(playerRender.WorldPosition);
 
-            foreach (var entity in GetMonsters(Rarity.Unique))
-                _drawMonsterLine(entity, Settings.UniqueLineColor);
+            if (Settings.ShowUniqueLine)
+            {
+                foreach (var entity in GetMonsters(Rarity.Unique))
+                    _drawMonsterLine(entity, Settings.UniqueLineColor);
+            }
 
-            foreach (var entity in GetMonsters(Rarity.Rare))
-                _drawMonsterLine(entity, Settings.RareLineColor);
+            if (Settings.ShowRareLine)
+            {
+                foreach (var entity in GetMonsters(Rarity.Rare))
+                    _drawMonsterLine(entity, Settings.RareLineColor);
+            }
 
-            foreach (var entity in GetMonsters(Rarity.Magic))
-                _drawMonsterLine(entity, Settings.MagicLineColor);
+            if (Settings.ShowMagicLine)
+            {
+                foreach (var entity in GetMonsters(Rarity.Magic))
+                    _drawMonsterLine(entity, Settings.MagicLineColor);
+            }
 
             void _drawMonsterLine(Entity entity, Vector4 color)
             {
