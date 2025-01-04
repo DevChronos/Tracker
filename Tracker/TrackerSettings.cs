@@ -1,4 +1,4 @@
-﻿namespace Tracker
+namespace Tracker
 {
     using GameHelper.Plugin;
     using System.Numerics;
@@ -14,6 +14,12 @@
         public Vector4 GroundEffectColor = new Vector4(1.0f, 0.0f, 0.0f, 0.5f);
         public string GroundEffects = string.Empty;
         public string MonsterStatusEffects = "shocked|Shocked|0xFF00FFFF\nproximal_intangibility|Intangible|0xFFFF00FF";
+
+        // New settings for checkboxes
+        public bool ShowUniqueLine = true;
+        public bool ShowRareLine = true;
+        public bool ShowMagicLine = true;
+        public bool ShowGroundEffects = true;
 
         public TrackerSettings()
         {
