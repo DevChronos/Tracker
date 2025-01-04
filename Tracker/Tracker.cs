@@ -1,4 +1,4 @@
-﻿namespace Tracker
+namespace Tracker
 {
     using GameHelper.Plugin;
     using ImGuiNET;
@@ -59,6 +59,12 @@
             ImGui.ColorEdit4("Ground effect color", ref Settings.GroundEffectColor);
             ImGui.InputTextMultiline("Ground effects", ref Settings.GroundEffects, 8000, new System.Numerics.Vector2(500, 100));
             ImGui.InputTextMultiline("Monster status effects", ref Settings.MonsterStatusEffects, 8000, new System.Numerics.Vector2(500, 100));
+
+            // Add checkboxes to enable/disable features
+            ImGui.Checkbox("Show unique monster lines", ref Settings.ShowUniqueLine);
+            ImGui.Checkbox("Show rare monster lines", ref Settings.ShowRareLine);
+            ImGui.Checkbox("Show magic monster lines", ref Settings.ShowMagicLine);
+            ImGui.Checkbox("Show ground effects", ref Settings.ShowGroundEffects);
         }
 
         /// <summary>

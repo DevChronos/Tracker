@@ -1,4 +1,4 @@
-﻿using GameHelper;
+using GameHelper;
 using GameHelper.RemoteObjects.Components;
 using GameHelper.Utils;
 using ImGuiNET;
@@ -21,6 +21,8 @@ namespace Tracker
         /// </summary>
         public void Draw()
         {
+            if (!Settings.ShowGroundEffects) return;
+
             var areaInstance = Core.States.InGameStateObject.CurrentAreaInstance;
             var groundEffects = areaInstance.AwakeEntities
                 .Where(entity => GroundEffects.Exists(effect => entity.Value.Path.StartsWith(effect.GroundEffect)))
