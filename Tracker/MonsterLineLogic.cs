@@ -12,17 +12,10 @@ using System.Numerics;
 
 namespace Tracker
 {
-    /// <summary>
-    /// MonsterLine
-    /// </summary>
-    /// <param name="settings"></param>
-    public class MonsterLine(TrackerSettings settings)
+    public class MonsterLineLogic(TrackerSettings settings)
     {
         private TrackerSettings Settings { get; } = settings;
 
-        /// <summary>
-        /// Draw
-        /// </summary>
         public void Draw()
         {
             var player = Core.States.InGameStateObject.CurrentAreaInstance.Player;
@@ -30,19 +23,19 @@ namespace Tracker
             if (!player.TryGetComponent<Render>(out var playerRender)) return;
             var playerlocation = Core.States.InGameStateObject.CurrentWorldInstance.WorldToScreen(playerRender.WorldPosition);
 
-            if (Settings.ShowUniqueLine)
+            if (Settings.UniqueLine)
             {
                 foreach (var entity in GetMonsters(Rarity.Unique))
                     _drawMonsterLine(entity, Settings.UniqueLineColor);
             }
 
-            if (Settings.ShowRareLine)
+            if (Settings.RareLine)
             {
                 foreach (var entity in GetMonsters(Rarity.Rare))
                     _drawMonsterLine(entity, Settings.RareLineColor);
             }
 
-            if (Settings.ShowMagicLine)
+            if (Settings.MagicLine)
             {
                 foreach (var entity in GetMonsters(Rarity.Magic))
                     _drawMonsterLine(entity, Settings.MagicLineColor);
